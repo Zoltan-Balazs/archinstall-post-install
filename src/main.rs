@@ -22,7 +22,7 @@ fn get_bool_answer_to_question<'a>(question: &'a str) -> bool {
 fn run_command(string: &str) {
     let command = string.split_whitespace().next().unwrap();
     let args = string.split_whitespace().skip(1).collect::<Vec<_>>();
-    Command::new(command).args(args).status().expect(format!("failed to run command {}", command).as_str());
+    Command::new(command).args(args).status().unwrap_or_else(|_| panic!("{}", format!("failed to run command {}", command)));
 }
 
 fn run_enable_services(services: Vec<&str>) {
