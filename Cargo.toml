@@ -1,0 +1,11 @@
+[package]
+name = "unix-post-install"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ansi_term = "0.12.1"
+inquire = { version = "0.2.1", features = ["builtin_validators", "date"] }
+sudo = "0.6.0"
