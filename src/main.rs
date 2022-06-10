@@ -1,7 +1,6 @@
 use inquire::{error::InquireResult, Confirm, MultiSelect,};
 use ansi_term::Style;
 use std::process::Command;
-use sudo;
 
 fn get_list_from_packages<'a>(message: &'a str, packages : Vec<&'a str>) -> Vec<&'a str> {
     MultiSelect::new(message, packages)
@@ -48,8 +47,6 @@ fn main() -> InquireResult<()> {
     run_command("makepkg -si");
     std::env::set_current_dir("..").expect("failed to execute process");
     run_command("rm -rf paru-bin");
-
-    // sudo::escalate_if_needed().unwrap();
 
     let software_packages = vec![
         "blender",
@@ -115,7 +112,7 @@ fn main() -> InquireResult<()> {
         "starship",
         "tealdeer",
         "yt-dlp",
-        "zoixde",
+        "zoxide",
     ];
 
     println!("{}", Style::new().bold().paint("Zolee's Post x86_64 Archinstall Setup Program"));
@@ -175,6 +172,10 @@ fn main() -> InquireResult<()> {
         run_command("curl https://github.com/bedrocklinux/bedrocklinux-userland/releases/download/0.7.27/bedrock-linux-0.7.27-x86_64.sh > bedrock-linux-0.7.27-x86_64.sh");
         run_command("sh ./bedrock-linux-0.7.27-x86_64.sh --hijack");
         run_command("rm bedrock-linux-0.7.27-x86_64.sh");
+    }
+
+    if install_software.contains(&"tealdeer") {
+        run_command("tldr --update");
     }
 
     Ok(())
