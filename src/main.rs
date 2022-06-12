@@ -168,7 +168,7 @@ fn finish_install(install: Installer) {
     }
 
     if install.settings.normalize_audio {
-
+        //
     }
 
     if install.settings.install_bedrock {
