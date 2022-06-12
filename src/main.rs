@@ -72,10 +72,6 @@ fn run_command_with_args(input_string: &str) {
     Command::new(command).args(args).status().unwrap_or_else(|_| panic!("{}", format!("failed to run command {}", command)));
 }
 
-fn run_command(command: &str) {
-    Command::new(command).status().unwrap_or_else(|_| panic!("{}", format!("failed to run command {}", command)));
-}
-
 fn run_enable_services(services: Vec<String>) {
     for service in services {
         match service.as_str() {
