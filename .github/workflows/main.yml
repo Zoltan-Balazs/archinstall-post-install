@@ -1,9 +1,6 @@
-name: Rust
+name: Rust Binary Release
 on:
-  push:
-    branches: [ "main" ]
   release:
-    types: [created]
     
 env:
   CARGO_TERM_COLOR: always
