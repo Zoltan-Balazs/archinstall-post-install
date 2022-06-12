@@ -1,0 +1,64 @@
+{
+    "software": [
+        "blender",
+        "celluloid",
+        "ferdium",
+        "ghidra",
+        "gimp",
+        "gwenview",
+        "jetbrains-toolbox",
+        "kate",
+        "kdeconnect",
+        "kitty",
+        "kolourpaint",
+        "latte-dock",
+        "libreoffice",
+        "okular",
+        "qalculate-qt5",
+        "qbittorrent-qt5",
+        "simplescreenrecorder",
+        "skanlite",
+        "skanpage",
+        "spectacle",
+        "timeshift-autosnap",
+        "timeshift-bin",
+        "visual-studio-code-insiders-bin"
+    ],
+    "service": [
+        "auto-cpufreq",
+        "bluez",
+        "bluez-utils",
+        "cups",
+        "samsung-unified-driver",
+        "samsung-unified-driver-printer",
+        "system76-power"
+    ],
+    "font": [
+        "nerd-fonts-cascadia-code",
+        "nerd-fonts-jetbrains-mono",
+        "noto-fonts-cjk",
+        "noto-fonts-emoji",
+        "noto-fonts-extra"
+    ],
+    "programming_language": [
+        "dotnet-sdk-bin",
+        "go",
+        "rustup"
+    ],
+    "utility": [
+        "bat",
+        "exa",
+        "fd",
+        "fish",
+        "hunspell-hu",
+        "git-delta",
+        "grex",
+        "ntfs-3g",
+        "procs",
+        "ripgrep",
+        "starship",
+        "tealdeer",
+        "yt-dlp",
+        "zoxide"
+    ]
+}
