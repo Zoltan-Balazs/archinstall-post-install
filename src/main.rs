@@ -1,6 +1,7 @@
+use curl::easy::Easy;
 use inquire::{error::InquireResult, Confirm, MultiSelect, Text,};
 use ansi_term::Style;
-use std::process::Command;
+use std::{process::Command, io::Write, fs::File};
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
@@ -124,14 +125,33 @@ fn install_packages(packages: Vec<String>) {
     }
 }
 
+fn download_file(url: &str, file_name: &str) {
+    let mut dst = Vec::new();
+    let mut easy = Easy::new();
+    easy.url(url).unwrap();
+    let _redirect = easy.follow_location(true);
+    {
+        let mut transfer = easy.transfer();
+        transfer.write_function(|data| {
+            dst.extend_from_slice(data);
+            Ok(data.len())
+        }).unwrap();
+        transfer.perform().unwrap();
+    }
+    {
+        let mut file = File::create(file_name).unwrap();
+        file.write_all(dst.as_slice()).unwrap();
+    }
+}
+
 fn finish_install(install: Installer) {
     run_command_with_args("paru -Syu");
 
-    install_packages(install.packages.software.clone());
+    /*install_packages(install.packages.software.clone());
     install_packages(install.packages.service.clone());
     install_packages(install.packages.font.clone());
     install_packages(install.packages.programming_language.clone());
-    install_packages(install.packages.utility.clone());
+    install_packages(install.packages.utility.clone());*/
 
     if install.settings.set_git_config {
         let name = Text::new("Git name: ").prompt().unwrap();
@@ -154,7 +174,7 @@ fn finish_install(install: Installer) {
     }
 
     if install.settings.install_omf {
-        run_command("curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > install");
+        download_file("https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install", "install");
         run_command_with_args("fish install");
         run_command_with_args("rm install");
     }
@@ -172,7 +192,7 @@ fn finish_install(install: Installer) {
     }
 
     if install.settings.install_bedrock {
-        run_command("curl https://github.com/bedrocklinux/bedrocklinux-userland/releases/download/0.7.27/bedrock-linux-0.7.27-x86_64.sh > bedrock-linux-0.7.27-x86_64.sh");
+        download_file("https://github.com/bedrocklinux/bedrocklinux-userland/releases/download/0.7.27/bedrock-linux-0.7.27-x86_64.sh", "bedrock-linux-0.7.27-x86_64.sh");
         run_command_with_args("sh ./bedrock-linux-0.7.27-x86_64.sh --hijack");
         run_command_with_args("rm bedrock-linux-0.7.27-x86_64.sh");
     }
