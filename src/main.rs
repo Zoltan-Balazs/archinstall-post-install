@@ -147,11 +147,11 @@ fn download_file(url: &str, file_name: &str) {
 fn finish_install(install: Installer) {
     run_command_with_args("paru -Syu");
 
-    /*install_packages(install.packages.software.clone());
+    install_packages(install.packages.software.clone());
     install_packages(install.packages.service.clone());
     install_packages(install.packages.font.clone());
     install_packages(install.packages.programming_language.clone());
-    install_packages(install.packages.utility.clone());*/
+    install_packages(install.packages.utility.clone());
 
     if install.settings.set_git_config {
         let name = Text::new("Git name: ").prompt().unwrap();
@@ -188,7 +188,7 @@ fn finish_install(install: Installer) {
     }
 
     if install.settings.normalize_audio {
-        //
+        
     }
 
     if install.settings.install_bedrock {
